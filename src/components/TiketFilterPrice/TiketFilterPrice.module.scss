@@ -1,0 +1,45 @@
+.boxLabel {
+  border: 1px solid #dfe5ec;
+  border-radius: 5px;
+  background-color: white;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  p {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.boxLabel input {
+  opacity: 0;
+  position: absolute;
+}
+
+.boxLabel label {
+  padding: 15px;
+  display: inline-block;
+  padding-left: 21px;
+  padding-right: 21px;
+}
+
+.boxLabel label:nth-child(1) {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.boxLabel label:nth-child(3) {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.boxLabel label:nth-child(2) {
+  border-left: 1px solid #dfe5ec;
+  border-right: 1px solid #dfe5ec;
+}
+
+.labelAria:has(input:checked) {
+  background-color: #2196f3;
+  p {
+    color: #ffffff;
+  }
+}

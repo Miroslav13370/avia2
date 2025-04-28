@@ -32,10 +32,18 @@
     "react-hooks/exhaustive-deps": "warn",
     "no-console": "off",
     "no-underscore-dangle": "off",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": ["nesting", "id"]
+        }
+      }
+    ],
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": ["vite.config.js"]
+        "devDependencies": ["**/vite.config.*"]
       }
     ],
     "no-restricted-imports": [

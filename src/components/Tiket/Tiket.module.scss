@@ -1,0 +1,58 @@
+.tiketBox {
+  width: 498px;
+  background-color: white;
+  padding: 20px 20px 10px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px 0 #00000011;
+  .titleLine {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    .titleLinePrise {
+      display: block;
+      margin: 0;
+      padding: 0;
+      font-size: 24px;
+      font-weight: 600px;
+      color: #2196f3;
+      text-align: center;
+    }
+    .titleLineLogo {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .gridElem {
+    margin: 0;
+    padding: 0;
+  }
+  .gridElemSection {
+    margin-bottom: 10px;
+  }
+  .titleSection {
+    font-size: 12px;
+    font-weight: 600px;
+    color: #a0b0b9;
+    text-transform: uppercase;
+    display: block;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 3px;
+  }
+  .bodySection {
+    font-size: 14px;
+    font-weight: 600px;
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+}

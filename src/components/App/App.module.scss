@@ -1,0 +1,19 @@
+.body {
+  font-family: 'Open Sans';
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+}
+
+.TiketFilter {
+  display: flex;
+}
+
+.titleLogo {
+  width: 100px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
