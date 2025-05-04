@@ -1,42 +1,93 @@
+import PropTypes from 'prop-types';
+import { addMinutes, format, parseISO } from 'date-fns';
 import style from './Tiket.module.scss';
-import S7Logo from '../../image/S7Logo.svg';
 
-function Tiket() {
+function flightTimeMachine(data, time) {
+  const departureDate = parseISO(data);
+  const arrivalDate = addMinutes(departureDate, time);
+  return `${format(departureDate, 'HH:mm')} – ${format(arrivalDate, 'HH:mm')}`;
+}
+function formatTimeduration(allTime) {
+  const hours = Math.floor(allTime / 60);
+  const minutes = allTime % 60;
+  return `${hours}ч ${minutes}м`;
+}
+
+function Tiket({ data = {} }) {
+  const { price, carrier, segments } = data;
+  function countTransfer(stop) {
+    if (stop.length === 0) {
+      return 'БЕЗ ПЕРЕСАДОК';
+    }
+    if (stop.length === 1) {
+      return '1 пересадка';
+    }
+    if (stop.length > 1) {
+      return `${stop.length} пересадки`;
+    }
+    return '';
+  }
+  function tranferList(stop) {
+    return stop.length === 0
+      ? 'ПРЯМОЙ'
+      : stop.map((elem, i, arr) => {
+          if (arr.length > 1 && arr.length === i + 1) {
+            return elem;
+          }
+          if (arr.length === 1) {
+            return elem;
+          }
+          return `${elem}, `;
+        });
+  }
+
+  const logo = `http://pics.avs.io/99/36/${carrier}.png`;
+
   return (
     <div className={style.tiketBox}>
       <div className={style.titleLine}>
-        <p className={style.titleLinePrise}>13 400 Р</p>
-        <img src={S7Logo} alt="logo" className={style.titleLineLogo} />
+        <p className={style.titleLinePrise}>
+          {`${String(price).slice(0, 2)} ${String(price).slice(2)} P`}
+        </p>
+        <img src={logo} alt="logo" className={style.titleLineLogo} />
       </div>
       <div className={style.grid}>
         <div className={style.gridElem}>
           <div className={style.gridElemSection}>
-            <p className={style.titleSection}>MOW – HKT</p>
-            <p className={style.bodySection}>10:45 – 08:00</p>
+            <p
+              className={style.titleSection}
+            >{`${segments[0].origin} - ${segments[0].destination}`}</p>
+            <p className={style.bodySection}>
+              {flightTimeMachine(segments[0].date, segments[0].duration)}
+            </p>
           </div>
           <div className={style.gridElemSection}>
-            <p className={style.titleSection}>MOW – HKT</p>
-            <p className={style.bodySection}>11:20 – 00:50</p>
+            <p
+              className={style.titleSection}
+            >{`${segments[1].origin} - ${segments[1].destination}`}</p>
+            <p className={style.bodySection}>
+              {flightTimeMachine(segments[1].date, segments[1].duration)}
+            </p>
           </div>
         </div>
         <div className={style.gridElem}>
           <div className={style.gridElemSection}>
             <p className={style.titleSection}>В пути</p>
-            <p className={style.bodySection}>21ч 15м</p>
+            <p className={style.bodySection}>{formatTimeduration(segments[0].duration)}</p>
           </div>
           <div className={style.gridElemSection}>
             <p className={style.titleSection}>В пути</p>
-            <p className={style.bodySection}>13ч 30м</p>
+            <p className={style.bodySection}>{formatTimeduration(segments[1].duration)}</p>
           </div>
         </div>
         <div className={style.gridElem}>
           <div className={style.gridElemSection}>
-            <p className={style.titleSection}>2 пересадки</p>
-            <p className={style.bodySection}>HKG, JNB</p>
+            <p className={style.titleSection}>{countTransfer(segments[0].stops)}</p>
+            <p className={style.bodySection}>{tranferList(segments[0].stops)}</p>
           </div>
           <div className={style.gridElemSection}>
-            <p className={style.titleSection}>1 пересадка</p>
-            <p className={style.bodySection}>HKG</p>
+            <p className={style.titleSection}>{countTransfer(segments[1].stops)}</p>
+            <p className={style.bodySection}>{tranferList(segments[1].stops)}</p>
           </div>
         </div>
       </div>
@@ -45,3 +96,7 @@ function Tiket() {
 }
 
 export default Tiket;
+
+Tiket.propTypes = {
+  data: PropTypes.arrayOf,
+};

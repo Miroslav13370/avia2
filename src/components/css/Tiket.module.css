@@ -1,0 +1,69 @@
+.tiketBox {
+  width: 498px;
+  background-color: white;
+  padding: 20px 20px 10px 20px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.0666666667);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.0666666667);
+}
+.tiketBox .titleLine {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.tiketBox .titleLine .titleLinePrise {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  font-weight: 600px;
+  color: #2196f3;
+  text-align: center;
+}
+.tiketBox .titleLine .titleLineLogo {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.tiketBox .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.tiketBox .gridElem {
+  margin: 0;
+  padding: 0;
+}
+.tiketBox .gridElemSection {
+  margin-bottom: 10px;
+}
+.tiketBox .titleSection {
+  font-size: 12px;
+  font-weight: 600px;
+  color: #a0b0b9;
+  text-transform: uppercase;
+  display: block;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 3px;
+}
+.tiketBox .bodySection {
+  font-size: 14px;
+  font-weight: 600px;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
