@@ -6,6 +6,7 @@ import TiketFilterPrice from '../TiketFilterPrice/TiketFilterPrice';
 import TiketList from '../TiketList/TiketList';
 import style from './App.module.scss';
 import { fetchKey, fetchList } from '../../store/sliceTikets';
+import ProgressTiketsLoader from '../ProgressTiketsLoader/ProgressTiketsLoader';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function App() {
         <TiketFilterTransfer />
         <div>
           <TiketFilterPrice />
+          <ProgressTiketsLoader />
           <TiketList />
         </div>
       </div>

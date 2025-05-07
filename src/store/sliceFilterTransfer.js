@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit';
 const slice = createSlice({
   name: 'checkFilterTransfer',
   initialState: {
-    all: false,
-    noTransfers: false,
-    oneTransfer: false,
-    twoTransfer: false,
-    threeTransfer: false,
+    all: true,
+    noTransfers: true,
+    oneTransfer: true,
+    twoTransfer: true,
+    threeTransfer: true,
   },
 
   reducers: {
