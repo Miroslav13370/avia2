@@ -5,18 +5,15 @@ import style from './TiketList.module.scss';
 
 function TiketList() {
   const isLoad = useSelector((state) => state.tikets.isLoad);
-  const isStop = useSelector((state) => state.tikets.isStop);
   const fullTiketList = useSelector((state) => state.tikets.fullTiketList);
   const checkedFilt = useSelector((state) => state.transfer);
   const [filtered, setFiltered] = useState([]);
   const { all, noTransfers, oneTransfer, twoTransfer, threeTransfer } = checkedFilt;
   const { cheap, fast, optimum } = useSelector((state) => state.price);
-  const [sliceCount, setSliceCount] = useState(5);
-
+  const [count, setcount] = useState(5);
   const addClickSliceCountHandler = () => {
-    setSliceCount((count) => count + 5);
+    setcount((counter) => counter + 5);
   };
-
   useEffect(() => {
     if (noTransfers && fullTiketList) {
       const arr = fullTiketList.filter((elem) => {
@@ -185,7 +182,6 @@ function TiketList() {
     fast,
     optimum,
   ]);
-
   if (!isLoad) {
     return <p>Загрузка...</p>;
   }
@@ -196,7 +192,7 @@ function TiketList() {
 
   return (
     <>
-      {filtered.slice(0, sliceCount).map((elem) => {
+      {filtered.slice(0, count).map((elem) => {
         return (
           <Tiket
             key={elem.price + elem.segments[0].duration + elem.segments[1].duration / Math.random()}
@@ -204,11 +200,9 @@ function TiketList() {
           />
         );
       })}
-      {isStop && (
-        <button type="button" className={style.showMore} onClick={addClickSliceCountHandler}>
-          Показать еще 5 билетов!
-        </button>
-      )}
+      <button type="button" className={style.showMore} onClick={addClickSliceCountHandler}>
+        Показать еще 5 билетов!
+      </button>
     </>
   );
 }

@@ -29,11 +29,6 @@ function TiketFilterTransfer() {
           checked={noTransfers}
           onChange={() => {
             dispatch(toggleFilterTransfer('noTransfers'));
-            if (!noTransfers) {
-              dispatch(filter('noTransfers'));
-            } else {
-              dispatch(filter('!noTransfers'));
-            }
           }}
         />
         <span />
@@ -45,11 +40,6 @@ function TiketFilterTransfer() {
           checked={oneTransfer}
           onChange={() => {
             dispatch(toggleFilterTransfer('oneTransfer'));
-            if (!oneTransfer) {
-              dispatch(filter('oneTransfer'));
-            } else {
-              dispatch(filter('!oneTransfer'));
-            }
           }}
         />
         <span />
@@ -61,11 +51,6 @@ function TiketFilterTransfer() {
           checked={twoTransfer}
           onChange={() => {
             dispatch(toggleFilterTransfer('twoTransfer'));
-            if (!twoTransfer) {
-              dispatch(filter('twoTransfer'));
-            } else {
-              dispatch(filter('!twoTransfer'));
-            }
           }}
         />
         <span />
@@ -77,11 +62,6 @@ function TiketFilterTransfer() {
           checked={threeTransfer}
           onChange={() => {
             dispatch(toggleFilterTransfer('threeTransfer'));
-            if (!threeTransfer) {
-              dispatch(filter('threeTransfer'));
-            } else {
-              dispatch(filter('!threeTransfer'));
-            }
           }}
         />
         <span />
