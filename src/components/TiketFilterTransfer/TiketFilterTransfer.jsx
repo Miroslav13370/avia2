@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './TiketFilterTransfer.module.scss';
 import { toggleFilterTransfer } from '../../store/sliceFilterTransfer';
-import { filter } from '../../store/sliceTikets';
 
 function TiketFilterTransfer() {
   const checkedFilt = useSelector((state) => state.transfer);
