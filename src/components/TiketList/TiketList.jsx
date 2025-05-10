@@ -156,19 +156,22 @@ function TiketList() {
     }
     if (cheap) {
       setFiltered((elems) => {
-        return [...elems].sort((a, b) => a.price - b.price);
+        const sort = [...elems].sort((a, b) => a.price - b.price);
+        return sort.slice(0, count);
       });
     }
     if (fast) {
       setFiltered((elems) => {
-        return [...elems].sort((a, b) => a.segments[0].duration - b.segments[0].duration);
+        const sort = [...elems].sort((a, b) => a.segments[0].duration - b.segments[0].duration);
+        return sort.slice(0, count);
       });
     }
     if (optimum) {
       setFiltered((elems) => {
-        return [...elems].sort(
+        const sort = [...elems].sort(
           (a, b) => a.price + a.segments[0].duration * 15 - (b.price + b.segments[0].duration * 15),
         );
+        return sort.slice(0, count);
       });
     }
   }, [
@@ -181,7 +184,10 @@ function TiketList() {
     cheap,
     fast,
     optimum,
+    count,
   ]);
+
+  console.log(filtered);
   if (!isLoad) {
     return <p>Загрузка...</p>;
   }
@@ -192,7 +198,7 @@ function TiketList() {
 
   return (
     <>
-      {filtered.slice(0, count).map((elem) => {
+      {filtered.map((elem) => {
         return (
           <Tiket
             key={elem.price + elem.segments[0].duration + elem.segments[1].duration / Math.random()}
