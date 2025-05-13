@@ -17,24 +17,17 @@ const slice = createSlice({
     progressLoad: 0,
     tiketKey: null,
     isStop: false,
-    fullTiketList: null,
     isLoad: false,
   },
   reducers: {
-    incrementCount(state) {
-      state.counterFetch += 1;
-    },
     addTik(state, action) {
+      if (state.progressLoad === 0) state.isLoad = true;
       state.tiketList.push(...action.payload);
       state.progressLoad += 1;
     },
-    toggleStop(state) {
-      state.fullTiketList.push(...state.tiketList);
+    toggleStop(state, action) {
+      state.tiketList.push(...action.payload);
       state.isStop = true;
-    },
-    addOnelist(state, action) {
-      state.isLoad = true;
-      state.fullTiketList = action.payload;
     },
   },
 
@@ -47,7 +40,9 @@ const slice = createSlice({
   },
 });
 
-export const { incrementCount, addTik, toggleStop, addOnelist, filter } = slice.actions;
+export const { addTik, toggleStop, addOnelist } = slice.actions;
+export const selectIsLoad = (state) => state.tikets.isLoad;
+export const selectTiketList = (state) => state.tikets.tiketList;
 
 export default slice.reducer;
 
@@ -56,19 +51,13 @@ export const fetchList = createAsyncThunk(
   async function b(_, { getState, dispatch }) {
     try {
       const key = getState().tikets.tiketKey;
-      const oneList = getState().tikets.fullTiketList;
       const res = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${key}`);
       const resJson = await res.json();
       if (!resJson.stop) {
-        if (!oneList) {
-          dispatch(addOnelist(resJson.tickets));
-          b(_, { getState, dispatch });
-        } else {
-          dispatch(addTik(resJson.tickets));
-          b(_, { getState, dispatch });
-        }
+        dispatch(addTik(resJson.tickets));
+        b(_, { getState, dispatch });
       } else {
-        dispatch(toggleStop());
+        dispatch(toggleStop(resJson.tickets));
       }
       return resJson;
     } catch (e) {

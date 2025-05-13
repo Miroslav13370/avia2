@@ -28,4 +28,5 @@ const slice = createSlice({
   },
 });
 export const { changeFilter } = slice.actions;
+export const selectPrice = (state) => state.price;
 export default slice.reducer;

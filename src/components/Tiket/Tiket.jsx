@@ -15,17 +15,13 @@ function formatTimeduration(allTime) {
 
 function Tiket({ data = {} }) {
   const { price, carrier, segments } = data;
-  function countTransfer(stop) {
-    if (stop.length === 0) {
-      return 'БЕЗ ПЕРЕСАДОК';
-    }
-    if (stop.length === 1) {
-      return '1 пересадка';
-    }
-    if (stop.length > 1) {
-      return `${stop.length} пересадки`;
-    }
-    return '';
+
+  function pluralize(count, one = 'пересадка', few = 'пересадки', many = 'пересадок') {
+    const mod10 = count % 10;
+    const mod100 = count % 100;
+    if (mod10 === 1 && mod100 !== 11) return one;
+    if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return few;
+    return many;
   }
   function tranferList(stop) {
     return stop.length === 0
@@ -82,11 +78,15 @@ function Tiket({ data = {} }) {
         </div>
         <div className={style.gridElem}>
           <div className={style.gridElemSection}>
-            <p className={style.titleSection}>{countTransfer(segments[0].stops)}</p>
+            <p
+              className={style.titleSection}
+            >{`${segments[0].stops.length} ${pluralize(segments[0].stops.length)}`}</p>
             <p className={style.bodySection}>{tranferList(segments[0].stops)}</p>
           </div>
           <div className={style.gridElemSection}>
-            <p className={style.titleSection}>{countTransfer(segments[1].stops)}</p>
+            <p
+              className={style.titleSection}
+            >{`${segments[1].stops.length} ${pluralize(segments[1].stops.length)}`}</p>
             <p className={style.bodySection}>{tranferList(segments[1].stops)}</p>
           </div>
         </div>
